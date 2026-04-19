@@ -9,7 +9,7 @@ export default function Leaderboard() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios.get('http://localhost:8000/donors')
+    axios.get('https://bloodconnect-backend-ey40.onrender.com/donors')
       .then(res => {
         const sorted = res.data.sort((a, b) => b.donation_count - a.donation_count)
         setDonors(sorted)

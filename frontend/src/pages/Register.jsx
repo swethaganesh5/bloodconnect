@@ -24,7 +24,7 @@ export default function Register() {
     e.preventDefault()
     setLoading(true)
     try {
-      await axios.post('http://localhost:8000/donors/register', {
+      await axios.post('https://bloodconnect-backend-ey40.onrender.com/donors/register', {
         ...form, latitude: parseFloat(form.latitude), longitude: parseFloat(form.longitude)
       })
       toast.success('Registered as donor successfully!')

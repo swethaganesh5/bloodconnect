@@ -39,7 +39,7 @@ export default function RequestBlood() {
     if (!form.latitude) { toast.error('Please select hospital location on map!'); return }
     setLoading(true)
     try {
-      const res = await axios.post('http://localhost:8000/requests/create', {
+      const res = await axios.post('https://bloodconnect-backend-ey40.onrender.com/requests/create', {
         ...form, latitude: parseFloat(form.latitude), longitude: parseFloat(form.longitude)
       })
       setMatched(res.data.matched_donors)

@@ -25,7 +25,7 @@ export default function Chatbot() {
     setMessages(prev => [...prev, { role: 'user', text: userMsg }])
     setLoading(true)
     try {
-      const res = await axios.post('http://localhost:8000/chat', { question: userMsg })
+      const res = await axios.post('https://bloodconnect-backend-ey40.onrender.com/chat', { question: userMsg })
       const answer = typeof res.data === 'string' ? res.data : res.data.answer
       setMessages(prev => [...prev, { role: 'bot', text: answer }])
     } catch {
@@ -41,7 +41,7 @@ export default function Chatbot() {
     const formData = new FormData()
     formData.append('file', file)
     try {
-      const res = await axios.post('http://localhost:8000/upload-doc', formData)
+      const res = await axios.post('https://bloodconnect-backend-ey40.onrender.com/upload-doc', formData)
       setMessages(prev => [...prev, { role: 'bot', text: `✅ Document uploaded! ${res.data.message} Now you can ask questions about it.` }])
     } catch {
       setMessages(prev => [...prev, { role: 'bot', text: '❌ Upload failed. Please try again.' }])
