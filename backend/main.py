@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from database import supabase
-from matching import find_matching_donor
+from matching import find_matching_donors
 import os
 import requests as http_requests
 import shutil
