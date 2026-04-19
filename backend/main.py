@@ -2,8 +2,7 @@ from fastapi import FastAPI, HTTPException, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from database import supabase
-from matching import find_matching_donors
-from chatbot import ask_question
+from matching import find_matching_donor
 import os
 import requests as http_requests
 import shutil
@@ -93,23 +92,6 @@ def get_requests():
     result = supabase.table("blood_requests").select("*").execute()
     return result.data
 
-@app.post("/chat")
-def chat(data: dict):
-    question = data.get("question", "")
-    if not question:
-        return {"error": "No question provided"}
-    result = ask_question(question)
-    return result
-
-@app.post("/upload-doc")
-async def upload_doc(file: UploadFile = File(...)):
-    from chatbot import load_documents
-    file_path = f"uploads/{file.filename}"
-    os.makedirs("uploads", exist_ok=True)
-    with open(file_path, "wb") as f:
-        shutil.copyfileobj(file.file, f)
-    chunks = load_documents(file_path)
-    return {"message": f"Document loaded! {chunks} chunks created."}
 
 @app.get("/")
 def root():
